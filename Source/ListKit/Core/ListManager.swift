@@ -16,13 +16,10 @@ import UIKit
 		-- `listView` could be a table/collection-view
 		
 		-- `shouldPerformBatchUpdate` controls whether to do a complete reload or 
-				just the changes
+				just update the changes
 		
 		-- `sections` is the only public variable one needs to set to update 
 				table/collection-view
-
-		-- currently few callbacks are provided like `didSelect` etc, so please 
-			 submit more PRs to add more callbacks...
 */
 
 public typealias Closure<P, Q> = ((P) -> Q)
@@ -32,10 +29,12 @@ open class ListManager: NSObject {
 	let listView: ListableView
 	let diffCalculator: ListableDiffCalculator
 
+	public weak var delegate: AnyObject?
 	public var shouldPerformBatchUpdate: Bool
 
-	public init(listView: ListableView, shouldPerformBatchUpdate: Bool = true) {
+	public init(listView: ListableView, shouldPerformBatchUpdate: Bool = true, delegate: AnyObject? = nil) {
 		self.listView = listView
+		self.delegate = delegate
 		self.diffCalculator = listView.diffCalculator
 		self.shouldPerformBatchUpdate = shouldPerformBatchUpdate
 

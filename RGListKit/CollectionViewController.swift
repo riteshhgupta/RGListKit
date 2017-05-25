@@ -12,7 +12,7 @@ final class CollectionViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView! {
 		didSet {
-			listManager = ListManager(listView: collectionView)
+			listManager = ListManager(listView: collectionView, delegate: self)
 		}
 	}
 	
@@ -43,3 +43,11 @@ extension CollectionViewController {
 	}
 }
 
+extension ListManager {
+
+	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard let vc = delegate as? CollectionViewController else { return }
+		print("CollectionViewController didSelectItemAt = \(indexPath.item)")
+		print(vc.view)
+	}
+}
