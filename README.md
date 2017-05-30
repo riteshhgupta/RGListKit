@@ -80,6 +80,12 @@ extension ListManager {
 
 - There are couple of examples in the project itself which you can checkout or create an issue or ping [me](https://twitter.com/_riteshhh) if anything comes up 👍
 
+## Blogs/Newsletter
+List of online sources which have mentioned RGListKit, 
+
+- [Natasha's newsletter - issue #133](https://swiftnews.curated.co/#libraries)
+- [Swift's Weekly - issue #78](http://digest.swiftweekly.com/issues/swift-weekly-issue-78-59042)
+
 ## Contributing
 
 Contributions are welcome and encouraged! Open an [issue](https://github.com/riteshhgupta/RGListKit/issues/new) or submit a [pull request](https://github.com/riteshhgupta/swift-snippets/compare) 🚀
