@@ -5,8 +5,9 @@ RGListKit is a **Protocol** & **MVVM** based framework for populating `UITableVi
 ## Features
 - No need to call `reloadData()`
 - No need to manage indexPaths to `performBatchUpdates(_:, completion:)`
-- It works with multiple sections as well
 - No need to use different apis to populate UITableView & UICollectionView
+- It works with multiple sections
+- It works with multiple cell types
 - `ListableView`, a protocol which unifies UITableView & UICollectionView
 - `ListManager` takes care of populating a `ListableView`
 - `[sections]` is all you need to set which acts like a datasource to populate a `ListableView`
