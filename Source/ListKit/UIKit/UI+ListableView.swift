@@ -43,7 +43,7 @@ extension UICollectionView: ListableView {
 		set { dataSource = newValue as? UICollectionViewDataSource }
 	}
 	public func reload() {
-		reloadData()
+		reloadData()		
 	}
 	public var diffCalculator: ListableDiffCalculator {
 		return RGCollectionViewDiffCalculator(collectionView: self)

@@ -16,7 +16,7 @@ class TableViewController: UIViewController {
 		}
 	}
 	
-	var listManager: ListManager?
+	var listManager: ListManager?	
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
