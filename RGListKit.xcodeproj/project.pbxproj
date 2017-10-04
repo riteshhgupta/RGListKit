@@ -37,6 +37,7 @@
 		3DD63E4E1E1FB00000167F9C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4A1E1FB00000167F9C /* CollectionViewController.swift */; };
 		3DD63E4F1E1FB00000167F9C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4B1E1FB00000167F9C /* TableViewController.swift */; };
 		3DD63E501E1FB00000167F9C /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4C1E1FB00000167F9C /* TableCell.swift */; };
+		E3CCB4D3D96B8FE7B2B1BFF4 /* Pods_RGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E360DD0B2CA657DB1D646BA3 /* Pods_RGListKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,9 @@
 		3DD63E4A1E1FB00000167F9C /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		3DD63E4B1E1FB00000167F9C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		3DD63E4C1E1FB00000167F9C /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		46A1F09AA12B287542981057 /* Pods-RGListKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGListKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit.debug.xcconfig"; sourceTree = "<group>"; };
+		8D3D55F6A394FB8B20929793 /* Pods-RGListKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGListKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit.release.xcconfig"; sourceTree = "<group>"; };
+		E360DD0B2CA657DB1D646BA3 /* Pods_RGListKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGListKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3CCB4D3D96B8FE7B2B1BFF4 /* Pods_RGListKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,8 @@
 				3DD63E0D1E1FAD1300167F9C /* Products */,
 				3DD63E0E1E1FAD1300167F9C /* RGListKit */,
 				3DD63E211E1FADB500167F9C /* Source */,
+				FF6C76059FAFCCF3FBE62254 /* Pods */,
+				662C19D1D7B26CFF8B2534CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +194,23 @@
 			path = DiffKit;
 			sourceTree = "<group>";
 		};
+		662C19D1D7B26CFF8B2534CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E360DD0B2CA657DB1D646BA3 /* Pods_RGListKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF6C76059FAFCCF3FBE62254 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46A1F09AA12B287542981057 /* Pods-RGListKit.debug.xcconfig */,
+				8D3D55F6A394FB8B20929793 /* Pods-RGListKit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,9 +218,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DD63E1E1E1FAD1300167F9C /* Build configuration list for PBXNativeTarget "RGListKit" */;
 			buildPhases = (
+				8386582E48586AA2B524B1FC /* [CP] Check Pods Manifest.lock */,
 				3DD63E081E1FAD1300167F9C /* Sources */,
 				3DD63E091E1FAD1300167F9C /* Frameworks */,
 				3DD63E0A1E1FAD1300167F9C /* Resources */,
+				84858A94EEA8329BE512C30E /* [CP] Embed Pods Frameworks */,
+				AE90BE1DC393D9AF973A67B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,6 +282,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8386582E48586AA2B524B1FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84858A94EEA8329BE512C30E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE90BE1DC393D9AF973A67B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DD63E081E1FAD1300167F9C /* Sources */ = {
@@ -408,6 +483,7 @@
 		};
 		3DD63E1F1E1FAD1300167F9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46A1F09AA12B287542981057 /* Pods-RGListKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G436LJ5F52;
@@ -424,6 +500,7 @@
 		};
 		3DD63E201E1FAD1300167F9C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D3D55F6A394FB8B20929793 /* Pods-RGListKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = G436LJ5F52;
