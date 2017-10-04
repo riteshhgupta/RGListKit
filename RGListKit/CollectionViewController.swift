@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 final class CollectionViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView! {
 		didSet {
-			listManager = ListManager(listView: collectionView, delegate: self)
+			listManager = ReactiveListManager(listView: collectionView, delegate: self)
 		}
 	}
 	
-	var listManager: ListManager?
+	var listManager: ReactiveListManager!
+	let items = MutableProperty<[SectionModel]?>(nil)
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+		listManager.reactiveSections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}
@@ -30,7 +34,7 @@ extension CollectionViewController {
 	func loadCacheData() {
 		let cells = (0..<50).map { "\($0)" }.map { CollectionCellModel(title: $0) }
 		let section = SectionModel(id: "section-one", cells: cells)
-		listManager?.sections = [section]
+		items.value = [section]
 	}
 
 	func mockAPIData() {
@@ -38,7 +42,7 @@ extension CollectionViewController {
 		DispatchQueue.main.asyncAfter(deadline: delay) {
 			let cells = (0..<50).filter { $0 % 2 == 0 }.map { "\($0)" }.map { CollectionCellModel(title: $0) }
 			let section = SectionModel(id: "section-one", cells: cells)
-			self.listManager?.sections = [section]
+			self.items.value = [section]
 		}
 	}
 }

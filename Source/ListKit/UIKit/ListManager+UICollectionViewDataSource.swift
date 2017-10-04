@@ -17,10 +17,7 @@ import UIKit
 extension ListManager: UICollectionViewDataSource {
 	
 	open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let item = sections[indexPath.section].cells[indexPath.row]
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseIdentifier, for: indexPath)
-		cell.as(ItemUI.self).flatMap { $0.configure(withModel: item) }
-		return cell
+		return listableView(collectionView, itemAt: indexPath) as! UICollectionViewCell
 	}
 
 	open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,28 +29,6 @@ extension ListManager: UICollectionViewDataSource {
 	}
 
 	open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-		guard let item = headerFooterModel(forKind: kind, indexPath: indexPath) else { return UICollectionReusableView() }
-		let cell = collectionView.dequeueReusableSupplementaryView(
-			ofKind: kind,
-			withReuseIdentifier: item.reuseIdentifier,
-			for: indexPath
-		)
-		cell.as(ItemUI.self).flatMap { $0.configure(withModel: item) }
-		return cell
-	}
-}
-
-fileprivate extension ListManager {
-	
-	func headerFooterModel(forKind kind: String, indexPath: IndexPath) -> ItemModel? {
-		let section = sections[indexPath.section]
-		switch kind {
-		case UICollectionElementKindSectionHeader:
-			return section.header
-		case UICollectionElementKindSectionFooter:
-			return section.footer
-		default:
-			return nil
-		}
+		return viewForHeaderFooter(at: indexPath, for: collectionView, of: kind) as! UICollectionReusableView
 	}
 }

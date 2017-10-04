@@ -32,6 +32,17 @@ open class ListManager: NSObject {
 	public weak var delegate: AnyObject?
 	public var shouldPerformBatchUpdate: Bool
 
+	// datasource
+	public var sections: [SectionModel] = [] {
+		didSet {
+			if shouldPerformBatchUpdate {
+				diffCalculator.batchReload(sections)
+			} else {
+				listView.reload()
+			}
+		}
+	}
+
 	public init(listView: ListableView, shouldPerformBatchUpdate: Bool = true, delegate: AnyObject? = nil) {
 		self.listView = listView
 		self.delegate = delegate
@@ -42,17 +53,6 @@ open class ListManager: NSObject {
 		self.listView._delegate = self
 		self.listView._dataSource = self
 	}
-	
-	// datasource
-	public var sections: [SectionModel] = [] {
-		didSet {
-			if shouldPerformBatchUpdate {
-				diffCalculator.batchReload(sections)
-			} else {
-				listView.reload()
-			}
-		}
-	}	
 }
 
 extension ListManager: ListableViewDelegate {}

@@ -15,6 +15,7 @@
 		3D8A737A1EB9205100F32E32 /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A73771EB9205100F32E32 /* Dwifft.swift */; };
 		3D8A737B1EB9205100F32E32 /* Dwifft+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A73781EB9205100F32E32 /* Dwifft+UIKit.swift */; };
 		3D8A737C1EB9205100F32E32 /* SectionedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A73791EB9205100F32E32 /* SectionedValues.swift */; };
+		3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */; };
 		3DD209531E8D1F1600581584 /* ListableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD209521E8D1F1600581584 /* ListableViewItem.swift */; };
 		3DD63E101E1FAD1300167F9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E0F1E1FAD1300167F9C /* AppDelegate.swift */; };
 		3DD63E151E1FAD1300167F9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD63E131E1FAD1300167F9C /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		3DD63E4E1E1FB00000167F9C /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4A1E1FB00000167F9C /* CollectionViewController.swift */; };
 		3DD63E4F1E1FB00000167F9C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4B1E1FB00000167F9C /* TableViewController.swift */; };
 		3DD63E501E1FB00000167F9C /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E4C1E1FB00000167F9C /* TableCell.swift */; };
+		3DDFA0591F84992600D7E24C /* Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFA0581F84992600D7E24C /* Reactive.swift */; };
 		E3CCB4D3D96B8FE7B2B1BFF4 /* Pods_RGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E360DD0B2CA657DB1D646BA3 /* Pods_RGListKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,7 @@
 		3D8A73771EB9205100F32E32 /* Dwifft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dwifft.swift; sourceTree = "<group>"; };
 		3D8A73781EB9205100F32E32 /* Dwifft+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dwifft+UIKit.swift"; sourceTree = "<group>"; };
 		3D8A73791EB9205100F32E32 /* SectionedValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedValues.swift; sourceTree = "<group>"; };
+		3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListManager+Extension.swift"; sourceTree = "<group>"; };
 		3DD209521E8D1F1600581584 /* ListableViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListableViewItem.swift; sourceTree = "<group>"; };
 		3DD63E0C1E1FAD1300167F9C /* RGListKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGListKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD63E0F1E1FAD1300167F9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		3DD63E4A1E1FB00000167F9C /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		3DD63E4B1E1FB00000167F9C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		3DD63E4C1E1FB00000167F9C /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		3DDFA0581F84992600D7E24C /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
 		46A1F09AA12B287542981057 /* Pods-RGListKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGListKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit.debug.xcconfig"; sourceTree = "<group>"; };
 		8D3D55F6A394FB8B20929793 /* Pods-RGListKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGListKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGListKit/Pods-RGListKit.release.xcconfig"; sourceTree = "<group>"; };
 		E360DD0B2CA657DB1D646BA3 /* Pods_RGListKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGListKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +153,7 @@
 		3DD63E211E1FADB500167F9C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3DDFA0571F8498FD00D7E24C /* Reactive */,
 				3DD63E331E1FAE0B00167F9C /* DiffKit */,
 				3DD63E241E1FAE0B00167F9C /* ListKit */,
 			);
@@ -172,6 +177,7 @@
 				3DD63E311E1FAE0B00167F9C /* ItemModel.swift */,
 				3DD63E231E1FAE0B00167F9C /* ItemUI.swift */,
 				3DD63E2C1E1FAE0B00167F9C /* ListManager.swift */,
+				3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */,
 				3D3D11271EB9DEA2001DDC31 /* ListableDiffCalculator.swift */,
 				3DD63E251E1FAE0B00167F9C /* ListableView.swift */,
 				3DD63E261E1FAE0B00167F9C /* ListableViewDatasource.swift */,
@@ -192,6 +198,14 @@
 				3D8A73791EB9205100F32E32 /* SectionedValues.swift */,
 			);
 			path = DiffKit;
+			sourceTree = "<group>";
+		};
+		3DDFA0571F8498FD00D7E24C /* Reactive */ = {
+			isa = PBXGroup;
+			children = (
+				3DDFA0581F84992600D7E24C /* Reactive.swift */,
+			);
+			path = Reactive;
 			sourceTree = "<group>";
 		};
 		662C19D1D7B26CFF8B2534CB /* Frameworks */ = {
@@ -347,7 +361,9 @@
 				3DD63E101E1FAD1300167F9C /* AppDelegate.swift in Sources */,
 				3DD63E3B1E1FAE0B00167F9C /* ListableViewDelegate.swift in Sources */,
 				3D0AFFE91EC7519B00092965 /* RGCollectionViewDiffCalculator.swift in Sources */,
+				3DDFA0591F84992600D7E24C /* Reactive.swift in Sources */,
 				3D8A737C1EB9205100F32E32 /* SectionedValues.swift in Sources */,
+				3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */,
 				3DD209531E8D1F1600581584 /* ListableViewItem.swift in Sources */,
 				3DD63E441E1FAE0B00167F9C /* SectionModel.swift in Sources */,
 				3DD63E411E1FAE0B00167F9C /* UI+ListableView.swift in Sources */,

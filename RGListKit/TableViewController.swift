@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class TableViewController: UIViewController {
 	
 	@IBOutlet public var tableView: UITableView! {
 		didSet {
-			listManager = ListManager(listView: tableView)
+			listManager = ReactiveListManager(listView: tableView)
 		}
 	}
-	
-	var listManager: ListManager?	
+
+	let items = MutableProperty<[SectionModel]?>(nil)
+
+	var listManager: ReactiveListManager!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		listManager.reactiveSections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}
@@ -30,7 +35,7 @@ extension TableViewController {
 	func loadCacheData() {
 		let cells = (0..<10).map { "\($0)" }.map { TableCellModel(title: $0) }
 		let section = SectionModel(id: "one", cells: cells)
-		listManager?.sections = [section]
+		items.value = [section]
 	}
 
 	func mockAPIData() {
@@ -38,7 +43,7 @@ extension TableViewController {
 		DispatchQueue.main.asyncAfter(deadline: delay) {
 			let cells = (0..<10).filter { $0 % 2 == 0 }.map { "\($0)" }.map { TableCellModel(title: $0) }
 			let section = SectionModel(id: "one", cells: cells)
-			self.listManager?.sections = [section]
+			self.items.value = [section]
 		}
 	}
 }

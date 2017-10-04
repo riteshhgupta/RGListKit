@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /*
 		-- `ListableView` protocol captures the common attributes/behaviours of 
@@ -27,4 +28,8 @@ public protocol ListableView: class {
 	var diffCalculator: ListableDiffCalculator { get }
 
 	func reload()
+
+	func dequeReusableItem(for identifier: String, at indexPath: IndexPath) -> ListableViewItem
+
+	func dequeueReusableHeaderFooterItem(for identifier: String, at indexPath: IndexPath, of kind: String) -> UIView?
 }

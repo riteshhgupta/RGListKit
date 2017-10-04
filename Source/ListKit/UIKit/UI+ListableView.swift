@@ -20,15 +20,26 @@ extension UITableView: ListableView {
 		get { return delegate as? ListableViewDelegate }
 		set { delegate = newValue as? UITableViewDelegate}
 	}
+
 	public var _dataSource: ListableViewDataSource? {
 		get { return dataSource as? ListableViewDataSource }
 		set { dataSource = newValue as? UITableViewDataSource }
 	}
+
 	public func reload() {
 		reloadData()
 	}
+
 	public var diffCalculator: ListableDiffCalculator {
 		return RGTableViewDiffCalculator(tableView: self)
+	}
+
+	public func dequeReusableItem(for identifier: String, at indexPath: IndexPath) -> ListableViewItem {
+		return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+	}
+
+	public func dequeueReusableHeaderFooterItem(for identifier: String, at indexPath: IndexPath, of kind: String) -> UIView? {
+		return dequeueReusableHeaderFooterView(withIdentifier: identifier)
 	}
 }
 
@@ -38,14 +49,24 @@ extension UICollectionView: ListableView {
 		get { return delegate as? ListableViewDelegate }
 		set { delegate = newValue as? UICollectionViewDelegate }
 	}
+
 	public var _dataSource: ListableViewDataSource? {
 		get { return dataSource as? ListableViewDataSource }
 		set { dataSource = newValue as? UICollectionViewDataSource }
 	}
+
 	public func reload() {
 		reloadData()		
 	}
+
 	public var diffCalculator: ListableDiffCalculator {
 		return RGCollectionViewDiffCalculator(collectionView: self)
 	}
-}
+
+	public func dequeReusableItem(for identifier: String, at indexPath: IndexPath) -> ListableViewItem {
+		return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+	}
+
+	public func dequeueReusableHeaderFooterItem(for identifier: String, at indexPath: IndexPath, of kind: String) -> UIView? {
+		return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
+	}}

@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 struct CollectionCellModel: ItemModel {
 	var id: String
@@ -24,15 +26,20 @@ struct CollectionCellModel: ItemModel {
 }
 
 final class CollectionCell: UICollectionViewCell {
-	
+
+	let model = MutableProperty<ItemModel?>(nil)
+
 	@IBOutlet var titleLabel: UILabel!
 
-}
-
-extension CollectionCell: ItemUI {
-	
-	func configure(withModel model: ItemModel) {
-		guard let item = model as? CollectionCellModel else { return }
-		titleLabel.text = item.title
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		titleLabel.reactive.text <~ model
+			.producer
+			.skipNil()
+			.map{ $0 as? CollectionCellModel }
+			.skipNil()
+			.map { $0.title }
 	}
 }
+
+extension CollectionCell: ReactiveItemUI {}

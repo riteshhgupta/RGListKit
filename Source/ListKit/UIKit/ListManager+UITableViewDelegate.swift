@@ -17,11 +17,13 @@ import UIKit
 extension ListManager: UITableViewDelegate {
 	
 	open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		return headerFooterView(forItem: sections[section].header, tableView: tableView)
+		let indexPath = IndexPath(row: 0, section: section)
+		return viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionHeader)
 	}
 
 	open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return headerFooterView(forItem: sections[section].footer, tableView: tableView)
+		let indexPath = IndexPath(row: 0, section: section)
+		return viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionFooter)
 	}
 
 	open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -49,19 +51,3 @@ extension ListManager: UITableViewDelegate {
 	}
 }
 
-extension ListableViewDelegate {
-
-	func headerFooterView(forItem item: ItemModel?, tableView: UITableView) -> UIView? {
-		guard let item = item else { return nil }
-		let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: item.reuseIdentifier)
-		view?.as(ItemUI.self).flatMap { $0.configure(withModel: item) }
-		return view
-	}
-}
-
-extension NSObject {
-
-	func `as`<T>(_ type: T.Type) -> T? {
-		return self as? T
-	}
-}

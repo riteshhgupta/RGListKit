@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
+import ReactiveCocoa
 
 struct TableCellModel: ItemModel {
 	var id: String
@@ -26,13 +28,19 @@ struct TableCellModel: ItemModel {
 
 final class TableCell: UITableViewCell {
 
-	@IBOutlet weak var titleLabel: UILabel!
-	
-}
+	let model = MutableProperty<ItemModel?>(nil)
 
-extension TableCell: ItemUI {
-	func configure(withModel model: ItemModel) {
-		guard let item = model as? TableCellModel else { return }
-		titleLabel.text = item.title
+	@IBOutlet weak var titleLabel: UILabel!
+
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		titleLabel.reactive.text <~ model
+			.producer
+			.skipNil()
+			.map{ $0 as? TableCellModel }
+			.skipNil()
+			.map { $0.title }
 	}
 }
+
+extension TableCell: ReactiveItemUI {}

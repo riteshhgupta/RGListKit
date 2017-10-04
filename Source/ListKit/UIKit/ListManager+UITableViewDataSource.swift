@@ -16,15 +16,12 @@ import UIKit
 
 extension ListManager: UITableViewDataSource {
 	
-	open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return sections[section].cells.count
+	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		return listableView(tableView, itemAt: indexPath) as! UITableViewCell
 	}
 
-	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let item = sections[indexPath.section].cells[indexPath.row]
-		let cell = tableView.dequeueReusableCell(withIdentifier: item.reuseIdentifier, for: indexPath)
-		cell.as(ItemUI.self).flatMap { $0.configure(withModel: item) }
-		return cell
+	open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return sections[section].cells.count
 	}
 
 	open func numberOfSections(in tableView: UITableView) -> Int {

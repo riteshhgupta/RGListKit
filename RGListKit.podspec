@@ -16,15 +16,13 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'Core' do |core|
       core.source_files =  'Source/DiffKit/*.{swift}', 'Source/ListKit/Core/*.{swift}', 'Source/ListKit/Extension/*.{swift}', 'Source/ListKit/UIKit/*.{swift}'
-      core.source_files = 'Source/*.swift'
-      core.exclude_files = 'Source/Reactive/*.{swift}'
   end
 
   spec.subspec 'ReactiveSwift' do |reactiveswift|
       reactiveswift.dependency 'RGListKit/Core'
       reactiveswift.dependency 'ReactiveSwift', '~> 2.0'
       reactiveswift.dependency 'ReactiveCocoa', '~> 6.0'
-      reactiveswift.source_files = 'Source/Reactive/*.{swift}'
+      reactiveswift.source_files =  'Source/DiffKit/*.{swift}', 'Source/ListKit/Core/*.{swift}', 'Source/ListKit/Extension/*.{swift}', 'Source/ListKit/UIKit/*.{swift}', 'Source/Reactive/*.{swift}'
   end
 
   spec.default_subspec = 'Core'
