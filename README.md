@@ -18,11 +18,23 @@ RGListKit is a **Protocol** & **MVVM** based framework for populating `UITableVi
 - Written completely in Swift 
 
 ## Installation
+
 ### Cocoapods
 To integrate RGListKit into your Xcode project using CocoaPods, specify it in your Podfile:
 
+#### Swift 3.1
 ```
   pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git'
+```
+
+#### Swift 4.0
+```
+  pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git', :branch => 'swift4'
+```
+
+#### Swift 4.0 + ReactiveSwift
+```
+  pod 'RGListKit/ReactiveSwift', :git => 'https://github.com/riteshhgupta/RGListKit.git', :branch => 'swift4'
 ```
 
 ## Example
@@ -83,8 +95,10 @@ extension ListManager {
 ## Blogs/Newsletter
 List of online sources which have mentioned RGListKit, 
 
-- [Natasha's newsletter - issue #133](https://swiftnews.curated.co/#libraries)
+- [Natasha's Swift newsletter - issue #133](https://swiftnews.curated.co/#libraries)
 - [Swift's Weekly - issue #78](http://digest.swiftweekly.com/issues/swift-weekly-issue-78-59042)
+- [Compile Swift newsletter - issue #58](http://mailchi.mp/baadd551f100/the-compileswift-newsletter-issue-1481361)
+- [iOS Cookies Newsletter - issue #82](http://mailchi.mp/1cfc2545e484/ios-cookies-newsletter-1406733)
 
 ## Contributing
 
