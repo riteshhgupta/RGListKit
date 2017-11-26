@@ -49,19 +49,21 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 		}
 	}
 
-	/// Initializes a SignalProducer that will invoke the given closure once for
-	/// each invocation of `start()`.
+	/// Initialize a `SignalProducer` which invokes the supplied starting side
+	/// effect once upon the creation of every produced `Signal`, or in other
+	/// words, for every invocation of `startWithSignal(_:)`, `start(_:)` and
+	/// their convenience shorthands.
 	///
-	/// The events that the closure puts into the given observer will become
-	/// the events sent by the started `Signal` to its observers.
+	/// The supplied starting side effect would be given (1) an input `Observer`
+	/// to emit events to the produced `Signal`; and (2) a `Lifetime` to bind
+	/// resources to the lifetime of the produced `Signal`.
 	///
-	/// - note: If the `Disposable` returned from `start()` is disposed or a
-	///         terminating event is sent to the observer, the given
-	///         `CompositeDisposable` will be disposed, at which point work
-	///         should be interrupted and any temporary resources cleaned up.
+	/// The `Lifetime` of a produced `Signal` ends when: (1) a terminal event is
+	/// sent to the input `Observer`; or (2) when the produced `Signal` is
+	/// interrupted via the disposable yielded at the starting call.
 	///
 	/// - parameters:
-	///   - startHandler: A closure that accepts observer and a disposable.
+	///   - startHandler: The starting side effect.
 	public init(_ startHandler: @escaping (Signal<Value, Error>.Observer, Lifetime) -> Void) {
 		self.init(SignalCore {
 			let disposable = CompositeDisposable()
@@ -217,11 +219,15 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 	///   - setup: A closure to be invoked before the work associated with the produced
 	///            `Signal` commences. Both the produced `Signal` and an interrupt handle
 	///            of the signal would be passed to the closure.
-	public func startWithSignal(_ setup: (_ signal: Signal<Value, Error>, _ interruptHandle: Disposable) -> Void) {
+	/// - returns: The return value of the given setup closure.
+	@discardableResult
+	public func startWithSignal<Result>(_ setup: (_ signal: Signal<Value, Error>, _ interruptHandle: Disposable) -> Result) -> Result {
 		let instance = core.makeInstance()
-		setup(instance.signal, instance.interruptHandle)
-		guard !instance.interruptHandle.isDisposed else { return }
-		instance.observerDidSetup()
+		let result = setup(instance.signal, instance.interruptHandle)
+		if !instance.interruptHandle.isDisposed {
+			instance.observerDidSetup()
+		}
+		return result
 	}
 }
 
@@ -335,8 +341,8 @@ private final class TransformerCore<Value, Error: Swift.Error, SourceValue, Sour
 
 	internal override func makeInstance() -> Instance {
 		let product = source.makeInstance()
-		let signal = Signal<Value, Error> { observer in
-			return product.signal.observe(Signal.Observer(observer, transform))
+		let signal = Signal<Value, Error> { observer, lifetime in
+			lifetime += product.signal.observe(Signal.Observer(observer, transform))
 		}
 
 		return Instance(signal: signal,
@@ -805,7 +811,6 @@ extension SignalProducer {
 		return core.flatMapEvent(Signal.Event.map(transform))
 	}
 
-#if swift(>=3.2)
 	/// Map each value in the producer to a new value by applying a key path.
 	///
 	/// - parameters:
@@ -815,7 +820,6 @@ extension SignalProducer {
 	public func map<U>(_ keyPath: KeyPath<Value, U>) -> SignalProducer<U, Error> {
 		return core.flatMapEvent(Signal.Event.filterMap { $0[keyPath: keyPath] })
 	}
-#endif
 
 	/// Map errors in the producer to a new error.
 	///

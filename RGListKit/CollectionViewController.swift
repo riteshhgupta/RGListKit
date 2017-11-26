@@ -23,7 +23,7 @@ final class CollectionViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		listManager.reactiveSections <~ items.producer.skipNil()
+		listManager.reactive.sections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}

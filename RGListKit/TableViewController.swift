@@ -24,7 +24,7 @@ class TableViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		listManager.reactiveSections <~ items.producer.skipNil()
+		listManager.reactive.sections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}

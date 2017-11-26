@@ -15,51 +15,12 @@ public protocol ReactiveItemUI {
 	var model: MutableProperty<ItemModel?> { get }
 }
 
-public class ReactiveListManager: ListManager {
+public class ReactiveListManager: ListManager {}
 
-	public let reactiveSections = MutableProperty<[SectionModel]?>(nil)
+public extension Reactive where Base: ReactiveListManager {
 
-	public override init(listView: ListableView, shouldPerformBatchUpdate: Bool = true, delegate: AnyObject? = nil) {
-		super.init(
-			listView: listView,
-			shouldPerformBatchUpdate: shouldPerformBatchUpdate,
-			delegate: delegate
-		)
-		reactive.updateChanges <~ reactiveSections.producer.skipNil()
-	}
-}
-
-fileprivate extension Reactive where Base: ReactiveListManager {
-
-	var updateChanges: BindingTarget<[SectionModel]> {
-		return makeBindingTarget { (manager, sections) in
-			manager.sections = sections
-		}
-	}
-}
-
-extension ReactiveListManager {
-
-	open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return r_listableView(tableView, itemAt: indexPath) as! UITableViewCell
-	}
-
-	open override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		let indexPath = IndexPath(row: 0, section: section)
-		return r_viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionHeader)
-	}
-
-	open override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		let indexPath = IndexPath(row: 0, section: section)
-		return r_viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionFooter)
-	}
-
-	open override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		return r_listableView(collectionView, itemAt: indexPath) as! UICollectionViewCell
-	}
-
-	open override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-		return r_viewForHeaderFooter(at: indexPath, for: collectionView, of: kind) as! UICollectionReusableView
+	var sections: BindingTarget<[SectionModel]> {
+		return makeBindingTarget { (manager, sections) in manager.sections = sections }
 	}
 }
 
