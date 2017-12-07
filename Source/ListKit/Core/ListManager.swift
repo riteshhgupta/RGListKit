@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ProtoKit
 
 /*
 		-- `ListManager` is the only public class which one needs to use to manage 
@@ -22,11 +23,10 @@ import UIKit
 				table/collection-view
 */
 
-public typealias Closure<P, Q> = ((P) -> Q)
+public typealias Closure<P, Q> = ((P) -> (Q))
 
-open class ListManager: NSObject {
+open class ListManager: ListViewHolder {
 	
-	let listView: ListableView
 	let diffCalculator: ListableDiffCalculator
 
 	public weak var delegate: AnyObject?
@@ -35,26 +35,64 @@ open class ListManager: NSObject {
 	// datasource
 	public var sections: [SectionModel] = [] {
 		didSet {
-			if shouldPerformBatchUpdate {
-				diffCalculator.batchReload(sections)
-			} else {
-				listView.reload()
-			}
+			if shouldPerformBatchUpdate { diffCalculator.batchReload(sections) }
+			else { listView.reloadItems() }
 		}
 	}
 
-	public init(listView: ListableView, shouldPerformBatchUpdate: Bool = true, delegate: AnyObject? = nil) {
-		self.listView = listView
+	public init(listView: DiffableListView, shouldPerformBatchUpdate: Bool = true, delegate: AnyObject? = nil) {
 		self.delegate = delegate
 		self.diffCalculator = listView.diffCalculator
 		self.shouldPerformBatchUpdate = shouldPerformBatchUpdate
 
-		super.init()
-		self.listView._delegate = self
-		self.listView._dataSource = self
+		super.init(listView: listView)
+	}
+	
+	override open func numberOfSectionsIn(listableView: ListableView) -> Int {
+		return sections.count
+	}
+	
+	override open func listableView(_ listableView: ListableView, numberOfItemsInSection section: Int) -> Int {
+		return sections[section].cells.count
+	}
+	
+	override open func listableView<Item: ReusableItem>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+		let data: (Item, ItemModel) = itemData(at: indexPath)
+		let (item, model) = data
+		guard let cell = item as? ItemModelInjectable else { return item }
+		cell.configure(with: model)
+		return item
+	}
+	
+	override open func listableView(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> UIView? {
+		guard let data = headerFooterItemData(at: indexPath, of: kind) else { return nil }
+		let (view, model) = data
+		guard let item = view as? ItemModelInjectable else { return view }
+		item.configure(with: model)
+		return view
+	}
+	
+	override open func listableView(_ listableView: ListableView, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return sections[indexPath.section].cells[indexPath.row].size
+	}
+	
+	override open func listableView(_ listableView: ListableView, estimatedHeightForItemAt indexPath: IndexPath) -> CGFloat {
+		return sections[indexPath.section].cells[indexPath.row].estimatedHeight
+	}
+	
+	override open func listableView(_ listableView: ListableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return sections[section].header?.height ?? 0.0
+	}
+	
+	override open func listableView(_ listableView: ListableView, heightForFooterInSection section: Int) -> CGFloat {
+		return sections[section].footer?.height ?? 0.0
+	}
+	
+	override open func listableView(_ listableView: ListableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return sections[section].header?.estimatedHeight ?? 0.0
+	}
+	
+	override open func listableView(_ listableView: ListableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+		return sections[section].footer?.estimatedHeight ?? 0.0
 	}
 }
-
-extension ListManager: ListableViewDelegate {}
-
-extension ListManager: ListableViewDataSource {}

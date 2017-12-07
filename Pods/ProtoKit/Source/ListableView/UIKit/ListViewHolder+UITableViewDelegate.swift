@@ -1,5 +1,5 @@
 //
-//  ListManager+UITableViewDelegate.swift
+//  ListViewHolder+UITableViewDelegate.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 06/01/17.
@@ -10,44 +10,44 @@ import Foundation
 import UIKit
 
 /*
-		-- `ListManager` conforms to `UITableViewDelegate` to provide delegate 
+		-- `ListViewHolder` conforms to `UITableViewDelegate` to provide delegate
 				support for `UITableView`
 */
 
-extension ListManager: UITableViewDelegate {
+extension ListViewHolder: UITableViewDelegate {
 	
 	open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let indexPath = IndexPath(row: 0, section: section)
-		return viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionHeader)
+		return listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionHeader)
 	}
 
 	open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let indexPath = IndexPath(row: 0, section: section)
-		return viewForHeaderFooter(at: indexPath, for: tableView, of: UICollectionElementKindSectionFooter)
+		return listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionFooter)
 	}
 
 	open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return sections[indexPath.section].cells[indexPath.row].height
+		return listableView(tableView, sizeForItemAt: indexPath).height
 	}
 
 	open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-		return sections[indexPath.section].cells[indexPath.row].estimatedHeight
+		return listableView(tableView, estimatedHeightForItemAt: indexPath)
 	}
 
 	open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return sections[section].header?.height ?? UITableViewAutomaticDimension
+		return listableView(tableView, heightForHeaderInSection: section)
 	}
 
 	open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return sections[section].footer?.height ?? UITableViewAutomaticDimension
+		return listableView(tableView, heightForFooterInSection: section)
 	}
 
 	open func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		return sections[section].header?.estimatedHeight ?? UITableViewAutomaticDimension
+		return listableView(tableView, estimatedHeightForHeaderInSection: section)
 	}
 
 	open func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-		return sections[section].footer?.estimatedHeight ?? UITableViewAutomaticDimension
+		return listableView(tableView, estimatedHeightForFooterInSection: section)
 	}
 }
 

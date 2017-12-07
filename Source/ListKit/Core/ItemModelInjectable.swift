@@ -1,5 +1,5 @@
 //
-//  ItemUI.swift
+//  ItemModelInjectable.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 04/01/17.
@@ -16,7 +16,7 @@ import Foundation
 			`cellForRowAt(:)` (for table) & `cellForItemAt(:)` (for collection-view)
 */
 
-public protocol ItemUI {
+public protocol ItemModelInjectable {
 	
-	func configure(withModel model: ItemModel)
+	func configure(with model: ItemModel)
 }

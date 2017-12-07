@@ -1,5 +1,5 @@
 //
-//  ListManager+UITableViewDataSource.swift
+//  ListViewHolder+UITableViewDataSource.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 06/01/17.
@@ -10,21 +10,21 @@ import Foundation
 import UIKit
 
 /*
-		-- `ListManager` conforms to `UITableViewDataSource` to provide data-source 
+		-- `ListViewHolder` conforms to `UITableViewDataSource` to provide data-source
 				support for `UITableView`
 */
 
-extension ListManager: UITableViewDataSource {
+extension ListViewHolder: UITableViewDataSource {
 	
 	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return listableView(tableView, itemAt: indexPath) as! UITableViewCell
+		return listableView(tableView, itemForItemAt: indexPath)
 	}
 
 	open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return sections[section].cells.count
+		return listableView(tableView, numberOfItemsInSection: section)
 	}
 
 	open func numberOfSections(in tableView: UITableView) -> Int {
-		return sections.count
+		return numberOfSectionsIn(listableView: tableView)
 	}
 }

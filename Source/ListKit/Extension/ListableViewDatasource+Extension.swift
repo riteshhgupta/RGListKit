@@ -12,7 +12,7 @@ import Foundation
 		-- helper methods which one can use with both UITable/UICollectionView 
 */
 
-public extension ListableViewDataSource {
+public extension ListManager {
 
 	/* returns a section from the list of sections based on a closure that returns a bool */
 

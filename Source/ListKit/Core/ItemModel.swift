@@ -34,9 +34,7 @@ public extension ItemModel {
 	var width: CGFloat { return 0.0 }
 	var estimatedHeight: CGFloat { return 100.0 }
 	
-	var size: CGSize {
-		return CGSize(width: width, height: height)
-	}
+	var size: CGSize { return CGSize(width: width, height: height) }
 }
 
 

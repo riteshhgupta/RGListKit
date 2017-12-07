@@ -16,8 +16,7 @@ import Foundation
 			 perform batch updates
 */
 
-final class RGTableViewDiffCalculator: TableViewDiffCalculator<SectionModel, EquatableItemModel> {
-}
+final class RGTableViewDiffCalculator: TableViewDiffCalculator<SectionModel, EquatableItemModel> {}
 
 extension RGTableViewDiffCalculator: ListableDiffCalculator {
 

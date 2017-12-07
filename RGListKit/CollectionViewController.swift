@@ -38,7 +38,7 @@ extension CollectionViewController {
 	}
 
 	func mockAPIData() {
-		let delay = DispatchTime.now() + 3
+		let delay = DispatchTime.now() + 2
 		DispatchQueue.main.asyncAfter(deadline: delay) {
 			let cells = (0..<50).filter { $0 % 2 == 0 }.map { "\($0)" }.map { CollectionCellModel(title: $0) }
 			let section = SectionModel(id: "section-one", cells: cells)

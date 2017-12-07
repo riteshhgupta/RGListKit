@@ -1,0 +1,6 @@
+framework module ProtoKit {
+  umbrella header "ProtoKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

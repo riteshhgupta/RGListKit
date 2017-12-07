@@ -13,7 +13,7 @@ import ReactiveCocoa
 extension ReactiveListManager {
 	
 	open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return r_listableView(tableView, itemAt: indexPath) as! UITableViewCell
+		return r_listableView(tableView, itemAt: indexPath)
 	}
 	
 	open override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -30,7 +30,7 @@ extension ReactiveListManager {
 extension ReactiveListManager {
 	
 	open override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		return r_listableView(collectionView, itemAt: indexPath) as! UICollectionViewCell
+		return r_listableView(collectionView, itemAt: indexPath)
 	}
 	
 	open override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

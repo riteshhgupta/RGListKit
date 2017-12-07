@@ -14,11 +14,13 @@ extension Array {
 		guard let idx = index(where: handler) else { return }
 		self[idx] = newElement
 	}
+	
 	func replaced(_ handler: Closure<Element, Bool>, with newElement: Element) -> [Element] {
 		var items = self
 		items.replace(handler, with: newElement)
 		return items
 	}
+	
 	func appended(with newItems: [Element]) -> [Element] {
 		var items = self
 		items.append(contentsOf: newItems)

@@ -15,6 +15,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc =  true
 
   spec.subspec 'Core' do |core|
+      core.dependency 'ProtoKit', :git => 'https://github.com/riteshhgupta/ProtoKit.git'
       core.source_files =  'Source/DiffKit/*.{swift}', 'Source/ListKit/Core/*.{swift}', 'Source/ListKit/Extension/*.{swift}', 'Source/ListKit/UIKit/*.{swift}'
   end
 
