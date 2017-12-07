@@ -24,12 +24,12 @@ To integrate RGListKit into your Xcode project using CocoaPods, specify it in yo
 
 #### Swift 3.1
 ```
-  pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git'
+  pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git', :branch => 'swift3'
 ```
 
 #### Swift 4.0
 ```
-  pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git', :branch => 'swift4'
+  pod 'RGListKit', :git => 'https://github.com/riteshhgupta/RGListKit.git'
 ```
 
 #### Swift 4.0 + ReactiveSwift
