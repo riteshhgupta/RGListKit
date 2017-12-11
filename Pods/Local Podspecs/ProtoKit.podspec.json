@@ -15,11 +15,5 @@
     "ios": "9.0"
   },
   "requires_arc": true,
-  "source_files": [
-    "Source/*.{swift}",
-    "Source/ListableView/*.{swift}",
-    "Source/ListableView/UIKit/*.{swift}",
-    "Source/ReusableItem/*.{swift}",
-    "Source/*.{swift}"
-  ]
+  "source_files": "Source/**/*.swift"
 }

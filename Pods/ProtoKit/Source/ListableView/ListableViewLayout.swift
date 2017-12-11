@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ListableViewLayout: NSObjectProtocol {
+public protocol ListableViewLayout: NSObjectProtocol {
 	
 	func listableView(_ listableView: ListableView, estimatedHeightForItemAt indexPath: IndexPath) -> CGFloat	
 	func listableView(_ listableView: ListableView, sizeForItemAt indexPath: IndexPath) -> CGSize

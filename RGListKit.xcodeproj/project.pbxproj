@@ -17,7 +17,17 @@
 		3D8A737B1EB9205100F32E32 /* Dwifft+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A73781EB9205100F32E32 /* Dwifft+UIKit.swift */; };
 		3D8A737C1EB9205100F32E32 /* SectionedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A73791EB9205100F32E32 /* SectionedValues.swift */; };
 		3D99434D1FD95B2C002B7C7B /* ItemModelInjectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D99434C1FD95B2B002B7C7B /* ItemModelInjectable.swift */; };
+		3D9B925D1FDC1F2500655C8B /* StackViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B92521FDC1F2500655C8B /* StackViewCollectionViewCell.xib */; };
+		3D9B925E1FDC1F2500655C8B /* StackViewItemHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92531FDC1F2500655C8B /* StackViewItemHolder.swift */; };
+		3D9B925F1FDC1F2500655C8B /* StackViewItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92541FDC1F2500655C8B /* StackViewItemProvider.swift */; };
+		3D9B92621FDC1F2500655C8B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92571FDC1F2500655C8B /* UIView+Extension.swift */; };
+		3D9B92631FDC1F2500655C8B /* StackViewItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92581FDC1F2500655C8B /* StackViewItemModel.swift */; };
+		3D9B92641FDC1F2500655C8B /* StackViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92591FDC1F2500655C8B /* StackViewHolder.swift */; };
+		3D9B92651FDC1F2500655C8B /* StackViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B925A1FDC1F2500655C8B /* StackViewCollectionViewCell.swift */; };
 		3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */; };
+		3DC64EDA1FDC2AE800E73AB0 /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC64ED91FDC2AE800E73AB0 /* StackViewController.swift */; };
+		3DC64EDC1FDC2DFF00E73AB0 /* StackItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC64EDB1FDC2DFF00E73AB0 /* StackItemView.xib */; };
+		3DC64EDE1FDC2E1400E73AB0 /* StackItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC64EDD1FDC2E1400E73AB0 /* StackItemView.swift */; };
 		3DD63E101E1FAD1300167F9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD63E0F1E1FAD1300167F9C /* AppDelegate.swift */; };
 		3DD63E151E1FAD1300167F9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD63E131E1FAD1300167F9C /* Main.storyboard */; };
 		3DD63E171E1FAD1300167F9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DD63E161E1FAD1300167F9C /* Assets.xcassets */; };
@@ -45,7 +55,17 @@
 		3D8A73781EB9205100F32E32 /* Dwifft+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dwifft+UIKit.swift"; sourceTree = "<group>"; };
 		3D8A73791EB9205100F32E32 /* SectionedValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedValues.swift; sourceTree = "<group>"; };
 		3D99434C1FD95B2B002B7C7B /* ItemModelInjectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModelInjectable.swift; sourceTree = "<group>"; };
+		3D9B92521FDC1F2500655C8B /* StackViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackViewCollectionViewCell.xib; sourceTree = "<group>"; };
+		3D9B92531FDC1F2500655C8B /* StackViewItemHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewItemHolder.swift; sourceTree = "<group>"; };
+		3D9B92541FDC1F2500655C8B /* StackViewItemProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewItemProvider.swift; sourceTree = "<group>"; };
+		3D9B92571FDC1F2500655C8B /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		3D9B92581FDC1F2500655C8B /* StackViewItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewItemModel.swift; sourceTree = "<group>"; };
+		3D9B92591FDC1F2500655C8B /* StackViewHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewHolder.swift; sourceTree = "<group>"; };
+		3D9B925A1FDC1F2500655C8B /* StackViewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListManager+Extension.swift"; sourceTree = "<group>"; };
+		3DC64ED91FDC2AE800E73AB0 /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
+		3DC64EDB1FDC2DFF00E73AB0 /* StackItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StackItemView.xib; sourceTree = "<group>"; };
+		3DC64EDD1FDC2E1400E73AB0 /* StackItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackItemView.swift; sourceTree = "<group>"; };
 		3DD63E0C1E1FAD1300167F9C /* RGListKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGListKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD63E0F1E1FAD1300167F9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DD63E141E1FAD1300167F9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +107,20 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		3D9B924F1FDC1F1200655C8B /* StackViewKit */ = {
+			isa = PBXGroup;
+			children = (
+				3D9B92581FDC1F2500655C8B /* StackViewItemModel.swift */,
+				3D9B925A1FDC1F2500655C8B /* StackViewCollectionViewCell.swift */,
+				3D9B92521FDC1F2500655C8B /* StackViewCollectionViewCell.xib */,
+				3D9B92531FDC1F2500655C8B /* StackViewItemHolder.swift */,
+				3D9B92541FDC1F2500655C8B /* StackViewItemProvider.swift */,
+				3D9B92591FDC1F2500655C8B /* StackViewHolder.swift */,
+				3D9B92571FDC1F2500655C8B /* UIView+Extension.swift */,
+			);
+			path = StackViewKit;
+			sourceTree = "<group>";
+		};
 		3DD63E031E1FAD1300167F9C = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +152,9 @@
 				3DD63E131E1FAD1300167F9C /* Main.storyboard */,
 				3DD63E4C1E1FB00000167F9C /* TableCell.swift */,
 				3DD63E4B1E1FB00000167F9C /* TableViewController.swift */,
+				3DC64ED91FDC2AE800E73AB0 /* StackViewController.swift */,
+				3DC64EDB1FDC2DFF00E73AB0 /* StackItemView.xib */,
+				3DC64EDD1FDC2E1400E73AB0 /* StackItemView.swift */,
 			);
 			path = RGListKit;
 			sourceTree = "<group>";
@@ -127,6 +164,7 @@
 			children = (
 				3DDFA0571F8498FD00D7E24C /* Reactive */,
 				3DD63E331E1FAE0B00167F9C /* DiffKit */,
+				3D9B924F1FDC1F1200655C8B /* StackViewKit */,
 				3DD63E241E1FAE0B00167F9C /* ListKit */,
 			);
 			path = Source;
@@ -259,6 +297,8 @@
 			files = (
 				3DD63E1A1E1FAD1300167F9C /* LaunchScreen.storyboard in Resources */,
 				3DD63E171E1FAD1300167F9C /* Assets.xcassets in Resources */,
+				3D9B925D1FDC1F2500655C8B /* StackViewCollectionViewCell.xib in Resources */,
+				3DC64EDC1FDC2DFF00E73AB0 /* StackItemView.xib in Resources */,
 				3DD63E151E1FAD1300167F9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,21 +375,29 @@
 				3DD63E4D1E1FB00000167F9C /* CollectionCell.swift in Sources */,
 				3DD63E101E1FAD1300167F9C /* AppDelegate.swift in Sources */,
 				3D0AFFE91EC7519B00092965 /* RGCollectionViewDiffCalculator.swift in Sources */,
+				3D9B925F1FDC1F2500655C8B /* StackViewItemProvider.swift in Sources */,
+				3D9B92631FDC1F2500655C8B /* StackViewItemModel.swift in Sources */,
 				3DDFA0591F84992600D7E24C /* Reactive.swift in Sources */,
 				3D8A737C1EB9205100F32E32 /* SectionedValues.swift in Sources */,
 				3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */,
 				3DD63E441E1FAE0B00167F9C /* SectionModel.swift in Sources */,
+				3D9B925E1FDC1F2500655C8B /* StackViewItemHolder.swift in Sources */,
 				3D99434D1FD95B2C002B7C7B /* ItemModelInjectable.swift in Sources */,
+				3D9B92651FDC1F2500655C8B /* StackViewCollectionViewCell.swift in Sources */,
 				3D3D11281EB9DEA2001DDC31 /* ListableDiffCalculator.swift in Sources */,
 				3DD63E401E1FAE0B00167F9C /* ListManager.swift in Sources */,
 				3D0AFFE71EC7516E00092965 /* RGTableViewDiffCalculator.swift in Sources */,
 				3DD63E421E1FAE0B00167F9C /* EquatableItemModel.swift in Sources */,
+				3D9B92641FDC1F2500655C8B /* StackViewHolder.swift in Sources */,
 				3DD63E431E1FAE0B00167F9C /* ItemModel.swift in Sources */,
 				3DD63E501E1FB00000167F9C /* TableCell.swift in Sources */,
 				3D8A737B1EB9205100F32E32 /* Dwifft+UIKit.swift in Sources */,
 				3D0759F81FCA920700CFA9BF /* Reactive+UIKit.swift in Sources */,
+				3DC64EDE1FDC2E1400E73AB0 /* StackItemView.swift in Sources */,
 				3D0AFFEB1EC763AF00092965 /* ListableViewDatasource+Extension.swift in Sources */,
+				3D9B92621FDC1F2500655C8B /* UIView+Extension.swift in Sources */,
 				3DD63E4F1E1FB00000167F9C /* TableViewController.swift in Sources */,
+				3DC64EDA1FDC2AE800E73AB0 /* StackViewController.swift in Sources */,
 				3D0AFFED1EC763D300092965 /* Array+RGListKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,15 +15,16 @@ Pod::Spec.new do |spec|
   spec.requires_arc =  true
 
   spec.subspec 'Core' do |core|
-      core.dependency 'ProtoKit', :git => 'https://github.com/riteshhgupta/ProtoKit.git'
-      core.source_files =  'Source/DiffKit/*.{swift}', 'Source/ListKit/Core/*.{swift}', 'Source/ListKit/Extension/*.{swift}', 'Source/ListKit/UIKit/*.{swift}'
+    core.dependency 'ProtoKit', '~> 1.0'
+    core.source_files =  'Source/**/*.swift', 'Source/**/*.xib'
+    core.exclude_files = 'Source/Reactive/*.swift'
   end
 
-  spec.subspec 'ReactiveSwift' do |reactiveswift|
-      reactiveswift.dependency 'RGListKit/Core'
-      reactiveswift.dependency 'ReactiveSwift', '~> 3.0'
-      reactiveswift.dependency 'ReactiveCocoa', '~> 7.0'
-      reactiveswift.source_files =  'Source/DiffKit/*.{swift}', 'Source/ListKit/Core/*.{swift}', 'Source/ListKit/Extension/*.{swift}', 'Source/ListKit/UIKit/*.{swift}', 'Source/Reactive/*.{swift}'
+  spec.subspec 'ReactiveSwift' do |reactiveswift|    
+    reactiveswift.dependency 'RGListKit/Core'
+    reactiveswift.dependency 'ReactiveSwift', '~> 3.0'
+    reactiveswift.dependency 'ReactiveCocoa', '~> 7.0'
+    reactiveswift.source_files =  'Source/**/*.swift'
   end
 
   spec.default_subspec = 'Core'
