@@ -25,7 +25,7 @@ open class StackViewHolder: ListViewHolder {
 		listView.register(nib: nib, for: holderType.typeName)
 	}
 
-	public var items: [StackViewItemModel] = [] {
+	public var itemModels: [StackViewItemModel] = [] {
 		didSet {
 			dynamicConstraint.constant = dynamicConstraintValue
 			listView.reloadItems()
@@ -37,30 +37,32 @@ open class StackViewHolder: ListViewHolder {
 	}
 	
 	override open func listableView(_ listableView: ListableView, numberOfItemsInSection section: Int) -> Int {
-		return items.count
+		return itemModels.count
 	}
 	
-	override open func listableView<Item: ReusableItem>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
-		let model = items[indexPath.row]
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+		let model = itemModels[indexPath.row]
 		let item: Item = listableView.reusableItem(withIdentifier: holderType.typeName, for: indexPath)
-		let holder = item as! (StackViewItemHolder & UIView)
-		holder.attach(itemType: model.itemType).configure(with: model)
+		guard let holder = item as? StackViewItemHolder else { return item }
+		let contentView = holder.attach(itemType: model.itemType)
+		guard let stackItem = contentView as? StackViewItemModelInjectable else { return item }
+		stackItem.itemModel?(model)
 		return item
 	}
 	
 	override open func listableView(_ listableView: ListableView, estimatedHeightForItemAt indexPath: IndexPath) -> CGFloat {
-		return items[indexPath.row].estimatedHeight
+		return itemModels[indexPath.row].estimatedHeight
 	}
 	
 	override open func listableView(_ listableView: ListableView, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return items[indexPath.row].size
+		return itemModels[indexPath.row].size
 	}
 }
 
 extension StackViewHolder {
 	
 	var dynamicConstraintValue: CGFloat {
-		if isVertical { return items.reduce(0, { $0 + $1.height }) }
-		else { return items.reduce(0, { $0 + $1.width }) }
+		if isVertical { return itemModels.reduce(0, { $0 + $1.height }) }
+		else { return itemModels.reduce(0, { $0 + $1.width }) }
 	}
 }

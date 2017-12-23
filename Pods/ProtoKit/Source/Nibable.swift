@@ -13,6 +13,7 @@ public protocol Nibable: class {
 	
 	var nib: UINib { get }
 	static var nib: UINib { get }
+	static func instance() -> UIView
 }
 
 public extension Nibable where Self: Describable {
@@ -23,5 +24,9 @@ public extension Nibable where Self: Describable {
 	
 	var nib: UINib {
 		return UINib(nibName: typeName, bundle: nil)
+	}
+	
+	static func instance() -> UIView {
+		return nib.instantiate(withOwner: self, options: nil).first as! UIView
 	}
 }

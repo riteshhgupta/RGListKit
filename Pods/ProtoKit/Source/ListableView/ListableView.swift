@@ -9,13 +9,15 @@
 import Foundation
 import UIKit
 
+public typealias ReusableView = ReusableListViewItem & UIView
+
 public protocol ListableView: class {
 	
 	var listDelegate: ListableViewDelegate? { get set }
 	var listDatasource: ListableViewDatasource? { get set }
 	
 	func register(nib: UINib, for identifier: String)
-	func reusableItem<Item: ReusableItem>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item
-	func reusableHeaderFooterItem(withIdentifier identifier: String, for indexPath: IndexPath, of kind: String) -> UIView?
+	func reusableItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item
+	func reusableHeaderFooterItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath, of kind: String) -> Item?
 	func reloadItems()
 }

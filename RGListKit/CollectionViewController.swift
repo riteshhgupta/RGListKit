@@ -14,16 +14,16 @@ final class CollectionViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView! {
 		didSet {
-			listManager = ReactiveListManager(listView: collectionView, delegate: self)
+			listViewHolder = ReactiveDiffableListViewHolder(listView: collectionView, delegate: self)
 		}
 	}
 	
-	var listManager: ReactiveListManager!
+	var listViewHolder: ReactiveDiffableListViewHolder!
 	let items = MutableProperty<[SectionModel]?>(nil)
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		listManager.reactive.sections <~ items.producer.skipNil()
+		listViewHolder.reactive.sections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}
@@ -47,7 +47,7 @@ extension CollectionViewController {
 	}
 }
 
-extension ListManager {
+extension DiffableListViewHolder {
 
 	public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let vc = delegate as? CollectionViewController else { return }

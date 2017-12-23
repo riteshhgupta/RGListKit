@@ -1,5 +1,5 @@
 //
-//  EquatableItemModel.swift
+//  EquatableListViewItemModel.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 01/01/17.
@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 /*
-		-- `EquatableItemModel` is an internal struct that gets injected into 
+		-- `EquatableListViewItemModel` is an internal struct that gets injected into 
 				dwifft calculator
 */
 
-struct EquatableItemModel: ItemModel, Equatable {
+struct EquatableListViewItemModel: ListViewItemModel, Equatable {
 	
 	var id: String
 	var reuseIdentifier: String
@@ -28,7 +28,7 @@ struct EquatableItemModel: ItemModel, Equatable {
 		self.width = width
 	}
 
-	public static func ==(lhs: EquatableItemModel, rhs: EquatableItemModel) -> Bool {
+	public static func ==(lhs: EquatableListViewItemModel, rhs: EquatableListViewItemModel) -> Bool {
 		return lhs.id == rhs.id
 	}
 }

@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import ProtoKit
 
 final class StackViewCollectionViewCell: UICollectionViewCell {
 	
-	var item: StackViewItem?
+	var item: Nibable?
 }
 
 extension StackViewCollectionViewCell: StackViewItemHolder {}

@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ProtoKit:
-    :commit: 135187a9aecf9e7eff104b91d1562e31c49dd771
+    :commit: c03e0ca32af1d35edb608758d9e7f165faeba0e1
     :git: https://github.com/riteshhgupta/ProtoKit.git
 
 SPEC CHECKSUMS:

@@ -25,12 +25,12 @@ extension UICollectionView: ListableView {
 		register(nib, forCellWithReuseIdentifier: identifier)
 	}
 	
-	public func reusableItem<Item: ReusableItem>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item {
+	public func reusableItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item {
 		return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! Item
 	}
 	
-	public func reusableHeaderFooterItem(withIdentifier identifier: String, for indexPath: IndexPath, of kind: String) -> UIView? {
-		return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
+	public func reusableHeaderFooterItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath, of kind: String) -> Item? {
+		return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath) as? Item
 	}
 	
 	public func reloadItems() {

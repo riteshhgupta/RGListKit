@@ -13,6 +13,6 @@ public protocol ListableViewDatasource: NSObjectProtocol {
 	
 	func numberOfSectionsIn(listableView: ListableView) -> Int
 	func listableView(_ listableView: ListableView, numberOfItemsInSection section: Int) -> Int
-	func listableView<Item: ReusableItem>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item
-	func listableView(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> UIView?
+	func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item
+	func listableView<Item: ReusableView>(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> Item?
 }

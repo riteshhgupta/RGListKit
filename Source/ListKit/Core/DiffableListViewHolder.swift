@@ -25,7 +25,7 @@ import ProtoKit
 
 public typealias Closure<P, Q> = ((P) -> (Q))
 
-open class ListManager: ListViewHolder {
+open class DiffableListViewHolder: ListViewHolder {
 	
 	let diffCalculator: ListableDiffCalculator
 
@@ -56,20 +56,20 @@ open class ListManager: ListViewHolder {
 		return sections[section].cells.count
 	}
 	
-	override open func listableView<Item: ReusableItem>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
-		let data: (Item, ItemModel) = itemData(at: indexPath)
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+		let data: (Item, ListViewItemModel) = itemData(at: indexPath)
 		let (item, model) = data
-		guard let cell = item as? ItemModelInjectable else { return item }
-		cell.configure(with: model)
+		guard let cell = item as? ListViewItemModelInjectable, let injector = cell.itemModel else { return item }
+		injector(model)
 		return item
 	}
 	
-	override open func listableView(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> UIView? {
-		guard let data = headerFooterItemData(at: indexPath, of: kind) else { return nil }
-		let (view, model) = data
-		guard let item = view as? ItemModelInjectable else { return view }
-		item.configure(with: model)
-		return view
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> Item? {
+		let data: (Item, ListViewItemModel)? = headerFooterItemData(at: indexPath, of: kind)
+		guard let (item, model) = data else { return nil }
+		guard let view = item as? ListViewItemModelInjectable, let injector = view.itemModel else { return item }
+		injector(model)
+		return item
 	}
 	
 	override open func listableView(_ listableView: ListableView, sizeForItemAt indexPath: IndexPath) -> CGSize {

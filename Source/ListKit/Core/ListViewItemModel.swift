@@ -1,5 +1,5 @@
 //
-//  ItemModel.swift
+//  ListViewItemModel.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 04/01/17.
@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 /*
-		-- `ItemModel` is used to define a cell, header or footer
+		-- `ListViewItemModel` is used to define a cell, header or footer
 		
-		-- conform UITableViewCell/UICollectionView or UITableViewHeaderFooterView models to `ItemModel` protocol.
+		-- conform UITableViewCell/UICollectionView or UITableViewHeaderFooterView models to `ListViewItemModel` protocol.
 		
 		-- `id` is used to distingiush any 2 cell-model so it should be unique.
 		
 		-- return `UITableViewAutomaticDimension` for automatic height calculation or some constant as height.
 */
 
-public protocol ItemModel {
+public protocol ListViewItemModel {
 	
 	var id: String { get }
 	var width: CGFloat { get }
@@ -28,7 +28,7 @@ public protocol ItemModel {
 	var reuseIdentifier: String { get }
 }
 
-public extension ItemModel {
+public extension ListViewItemModel {
 
 	var height: CGFloat { return UITableViewAutomaticDimension }
 	var width: CGFloat { return 0.0 }
@@ -42,10 +42,10 @@ public extension ItemModel {
 		-- Internal logic
 */
 
-extension ItemModel {
+extension ListViewItemModel {
 
-	var model: EquatableItemModel {
-		return EquatableItemModel(
+	var model: EquatableListViewItemModel {
+		return EquatableListViewItemModel(
 			id: id,
 			reuseIdentifier: reuseIdentifier,
 			height: height,

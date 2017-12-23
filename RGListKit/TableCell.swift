@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import ReactiveSwift
 import ReactiveCocoa
+import Result
 
-struct TableCellModel: ItemModel {
+struct TableCellModel: ListViewItemModel {
 	var id: String
 	let title: String
 	var reuseIdentifier: String {
@@ -27,20 +28,28 @@ struct TableCellModel: ItemModel {
 }
 
 final class TableCell: UITableViewCell {
-
-	let model = MutableProperty<ItemModel?>(nil)
-
+	
+	let itemModel = MutableProperty<ListViewItemModel?>(nil)
+	
 	@IBOutlet weak var titleLabel: UILabel!
-
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		titleLabel.reactive.text <~ model
+		titleLabel.reactive.text <~ reactive.title
+	}
+}
+
+extension Reactive where Base: TableCell {
+	
+	var title: SignalProducer<String, NoError> {
+		return base
+			.itemModel
 			.producer
 			.skipNil()
-			.map{ $0 as? TableCellModel }
+			.map { $0 as? TableCellModel }
 			.skipNil()
 			.map { $0.title }
 	}
 }
 
-extension TableCell: ReactiveItemUI {}
+extension TableCell: ReactiveListViewItemModelInjectable {}

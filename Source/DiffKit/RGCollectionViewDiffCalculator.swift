@@ -16,7 +16,7 @@ import Foundation
 			 perform batch updates
 */
 
-final class RGCollectionViewDiffCalculator: CollectionViewDiffCalculator<SectionModel, EquatableItemModel> {}
+final class RGCollectionViewDiffCalculator: CollectionViewDiffCalculator<SectionModel, EquatableListViewItemModel> {}
 
 extension RGCollectionViewDiffCalculator: ListableDiffCalculator {
 

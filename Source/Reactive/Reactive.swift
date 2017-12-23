@@ -11,34 +11,51 @@ import ReactiveSwift
 import ReactiveCocoa
 import ProtoKit
 
-public protocol ReactiveItemUI {
-
-	var model: MutableProperty<ItemModel?> { get }
+public protocol ReactiveListViewItemModelInjectable {
+	
+	var itemModel: MutableProperty<ListViewItemModel?> { get }
 }
 
-public extension Reactive where Base: ListManager {
 
+public protocol ReactiveStackViewItemModelInjectable {
+	
+	var itemModel: MutableProperty<StackViewItemModel?> { get }
+}
+
+public extension Reactive where Base: ReactiveDiffableListViewHolder {
+	
 	var sections: BindingTarget<[SectionModel]> {
-		return makeBindingTarget { (manager, sections) in manager.sections = sections }
+		return makeBindingTarget { $0.sections = $1 }
 	}
 }
 
-public class ReactiveListManager: ListManager {}
+public extension Reactive where Base: ReactiveStackViewHolder {
+	
+	var itemModels: BindingTarget<[StackViewItemModel]> {
+		return makeBindingTarget { $0.itemModels = $1 }
+	}
+}
 
-extension ReactiveListManager {
-
-	func r_listableView<Item: ReusableItem>(_ listableView: ListableView, itemAt indexPath: IndexPath) -> Item {
-		let data: (Item, ItemModel) = itemData(at: indexPath)
+public class ReactiveDiffableListViewHolder: DiffableListViewHolder {
+	
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+		let data: (Item, ListViewItemModel) = itemData(at: indexPath)
 		let (item, model) = data
-		guard let cell = item as? ReactiveItemUI else { return item }
-		cell.model.value = model
+		guard let cell = item as? ReactiveListViewItemModelInjectable else { return item }
+		cell.itemModel.value = model
 		return item
 	}
+}
 
-	func r_viewForHeaderFooter(at indexPath: IndexPath, for listableView: ListableView, of kind: String) -> UIView? {
-		guard let (view, model) = headerFooterItemData(at: indexPath, of: kind) else { return nil }
-		guard let item = view as? ReactiveItemUI else { return view }
-		item.model.value = model
-		return view
+public class ReactiveStackViewHolder: StackViewHolder {
+	
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+		let model = itemModels[indexPath.row]
+		let item: Item = listableView.reusableItem(withIdentifier: holderType.typeName, for: indexPath)
+		guard let holder = item as? StackViewItemHolder else { return item }
+		let contentView = holder.attach(itemType: model.itemType)
+		guard let stackItem = contentView as? ReactiveStackViewItemModelInjectable else { return item }
+		stackItem.itemModel.value = model
+		return item
 	}
 }

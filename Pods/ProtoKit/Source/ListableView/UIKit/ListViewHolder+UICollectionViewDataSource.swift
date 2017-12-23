@@ -29,6 +29,7 @@ extension ListViewHolder: UICollectionViewDataSource {
 	}
 
 	open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-		return listableView(collectionView, viewForHeaderFooterAt: indexPath, of: kind) as! UICollectionReusableView
+		let view: UICollectionReusableView? = listableView(collectionView, viewForHeaderFooterAt: indexPath, of: kind)
+		return view!
 	}
 }

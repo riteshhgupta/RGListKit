@@ -1,5 +1,5 @@
 //
-//  ReusableItem.swift
+//  ReusableListViewItem.swift
 //  GenericTable
 //
 //  Created by Ritesh Gupta on 03/12/17.
@@ -9,4 +9,4 @@
 import Foundation
 import UIKit
 
-public protocol ReusableItem: Nibable, Describable {}
+public protocol ReusableListViewItem: Nibable, Describable {}

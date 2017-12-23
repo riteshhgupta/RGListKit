@@ -11,7 +11,7 @@ import UIKit
 import ReactiveSwift
 import ReactiveCocoa
 
-struct CollectionCellModel: ItemModel {
+struct CollectionCellModel: ListViewItemModel {
 	var id: String
 	var title: String
 	
@@ -27,13 +27,13 @@ struct CollectionCellModel: ItemModel {
 
 final class CollectionCell: UICollectionViewCell {
 
-	let model = MutableProperty<ItemModel?>(nil)
+	let itemModel = MutableProperty<ListViewItemModel?>(nil)
 
 	@IBOutlet var titleLabel: UILabel!
 
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		titleLabel.reactive.text <~ model
+		titleLabel.reactive.text <~ itemModel
 			.producer
 			.skipNil()
 			.map{ $0 as? CollectionCellModel }
@@ -42,4 +42,4 @@ final class CollectionCell: UICollectionViewCell {
 	}
 }
 
-extension CollectionCell: ReactiveItemUI {}
+extension CollectionCell: ReactiveListViewItemModelInjectable {}

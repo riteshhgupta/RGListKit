@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 import ProtoKit
 
-public protocol StackViewItemHolder: ReusableItem {
+public protocol StackViewItemHolder: ReusableListViewItem {
 	
-	var item: StackViewItem? { get set }
+	var item: Nibable? { get set }
 	var holderView: UIView { get }
 }
 
 public extension StackViewItemHolder {
 	
-	public func attach(itemType: StackViewItem.Type) -> StackViewItem {
+	public func attach(itemType: Nibable.Type) -> Nibable {
 		guard let item = self.item else {
 			let _item = itemType.instance()
 			self.item = _item

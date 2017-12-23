@@ -30,12 +30,12 @@ open class ListViewHolder: NSObject {
 		return 0
 	}
 	
-	open func listableView<Item: ReusableItem>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
+	open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
 		// override
 		return listView.reusableItem(withIdentifier: "", for: indexPath)
 	}
 	
-	open func listableView(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> UIView? {
+	open func listableView<Item: ReusableView>(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> Item? {
 		// override
 		return listView.reusableHeaderFooterItem(withIdentifier: "", for: indexPath, of: kind)
 	}

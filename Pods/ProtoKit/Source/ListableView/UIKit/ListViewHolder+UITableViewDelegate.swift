@@ -18,12 +18,14 @@ extension ListViewHolder: UITableViewDelegate {
 	
 	open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let indexPath = IndexPath(row: 0, section: section)
-		return listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionHeader)
+		let view: UITableViewHeaderFooterView? = listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionHeader)
+		return view
 	}
 
 	open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		let indexPath = IndexPath(row: 0, section: section)
-		return listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionFooter)
+		let view: UITableViewHeaderFooterView? = listableView(tableView, viewForHeaderFooterAt: indexPath, of: UICollectionElementKindSectionHeader)
+		return view
 	}
 
 	open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

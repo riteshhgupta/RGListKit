@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import ProtoKit
 
-public protocol StackViewItemModel: ItemModel {
+public protocol StackViewItemModel: ListViewItemModel {
 	
-	var itemType: StackViewItem.Type { get }
+	var itemType: Nibable.Type { get }
 }
 
 public extension StackViewItemModel {

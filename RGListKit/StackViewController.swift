@@ -8,25 +8,26 @@
 
 import Foundation
 import UIKit
+import ReactiveSwift
 
 class StackViewController: UIViewController {
 	
 	@IBOutlet var collectionView: UICollectionView!
 	@IBOutlet var collectionViewWidthConstraint: NSLayoutConstraint!
 	
-	var horizontalStackView: StackViewHolder! {
+	var horizontalStackView: ReactiveStackViewHolder! {
 		didSet {
-			horizontalStackView.items = [
-				Model(title: "14"),
-				Model(title: "15"),
-				Model(title: "16")
-			]
+			horizontalStackView.reactive.itemModels <~ MutableProperty([
+				TitleStackViewItemModel(title: "14"),
+				TitleStackViewItemModel(title: "15"),
+				TitleStackViewItemModel(title: "16")
+				])
 		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		horizontalStackView = StackViewHolder(
+		horizontalStackView = ReactiveStackViewHolder(
 			listView: collectionView,
 			dynamicConstraint: collectionViewWidthConstraint,
 			isVertical: false

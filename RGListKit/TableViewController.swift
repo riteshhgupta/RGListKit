@@ -14,17 +14,16 @@ class TableViewController: UIViewController {
 	
 	@IBOutlet public var tableView: UITableView! {
 		didSet {
-			listManager = ReactiveListManager(listView: tableView)
+			listViewHolder = ReactiveDiffableListViewHolder(listView: tableView)
 		}
 	}
 
 	let items = MutableProperty<[SectionModel]?>(nil)
-
-	var listManager: ReactiveListManager!
+	var listViewHolder: ReactiveDiffableListViewHolder!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		listManager.reactive.sections <~ items.producer.skipNil()
+		listViewHolder.reactive.sections <~ items.producer.skipNil()
 		loadCacheData()
 		mockAPIData()
 	}

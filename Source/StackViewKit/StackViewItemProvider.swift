@@ -10,17 +10,7 @@ import Foundation
 import UIKit
 import ProtoKit
 
-public typealias StackViewItem = StackViewItemProvider & UIView
+public protocol StackViewItemModelInjectable: Nibable {
 
-public protocol StackViewItemProvider {
-	
-	static func instance() -> StackViewItem
-	func configure(with model: StackViewItemModel)
-}
-
-public extension StackViewItemProvider where Self: Describable & Nibable {
-	
-	public static func instance() -> StackViewItem {
-		return nib.instantiate(withOwner: self, options: nil).first as! StackViewItem
-	}
+	var itemModel: ((StackViewItemModel) -> Void)? { get set }
 }

@@ -9,24 +9,40 @@
 import Foundation
 import UIKit
 import ProtoKit
+import ReactiveSwift
+import Result
 
-struct Model: StackViewItemModel {
+struct TitleStackViewItemModel: StackViewItemModel {
 	
 	let title: String
-	var itemType: StackViewItem.Type { return StackItemView.self }
+	var itemType: Nibable.Type { return StackItemView.self }
 	var height: CGFloat { return 64.0 }
 	var width: CGFloat { return 100.0 }
 }
 
-class StackItemView: UIView {
+final class StackItemView: UIView {
 
+	var itemModel = MutableProperty<StackViewItemModel?>(nil)
+	
 	@IBOutlet var label: UILabel!
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		label.reactive.text <~ reactive.title
+	}
 }
 
-extension StackItemView: StackViewItemProvider {
+extension StackItemView: ReactiveStackViewItemModelInjectable {}
+
+extension Reactive where Base: StackItemView {
 	
-	func configure(with model: StackViewItemModel) {
-		guard let model = model as? Model else { return }
-		label.text = model.title
+	var title: SignalProducer<String, NoError> {
+		return base
+			.itemModel
+			.producer
+			.skipNil()
+			.map { $0 as? TitleStackViewItemModel }
+			.skipNil()
+			.map { $0.title }
 	}
 }

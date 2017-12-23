@@ -13,18 +13,18 @@ import Foundation
 
 		-- `id` is used to distinguish any 2 section-model so it should be unique.
 
-		-- cell, header & footer --> all follow the same `ItemModel` protocol since 
+		-- cell, header & footer --> all follow the same `ListViewItemModel` protocol since 
 			 all are reusable and need the same info while configuring them.
 */
 
 public struct SectionModel: Equatable {
 	
 	public var id: String
-	public var cells: [ItemModel]
-	public var header: ItemModel?
-	public var footer: ItemModel?
+	public var cells: [ListViewItemModel]
+	public var header: ListViewItemModel?
+	public var footer: ListViewItemModel?
 	
-	public init(id: String, cells: [ItemModel], header: ItemModel? = nil, footer: ItemModel? = nil) {
+	public init(id: String, cells: [ListViewItemModel], header: ListViewItemModel? = nil, footer: ListViewItemModel? = nil) {
 		self.id = id
 		self.header = header
 		self.footer = footer

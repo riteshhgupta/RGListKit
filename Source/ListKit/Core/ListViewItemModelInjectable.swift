@@ -1,5 +1,5 @@
 //
-//  ItemModelInjectable.swift
+//  ListViewItemModelInjectable.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 04/01/17.
@@ -16,7 +16,7 @@ import Foundation
 			`cellForRowAt(:)` (for table) & `cellForItemAt(:)` (for collection-view)
 */
 
-public protocol ItemModelInjectable {
+public protocol ListViewItemModelInjectable {
 	
-	func configure(with model: ItemModel)
+	var itemModel: ((ListViewItemModel) -> Void)? { get set }
 }

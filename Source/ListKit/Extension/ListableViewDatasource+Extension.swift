@@ -12,7 +12,7 @@ import Foundation
 		-- helper methods which one can use with both UITable/UICollectionView 
 */
 
-public extension ListManager {
+public extension DiffableListViewHolder {
 
 	/* returns a section from the list of sections based on a closure that returns a bool */
 
@@ -39,7 +39,7 @@ public extension ListManager {
 	- collapses the required section (removes all the items in the required section)
 	- returns the items in the section which has been collapsed
 	*/
-	public func collapseSection<T: ItemModel>(_ handler: Closure<SectionModel, Bool>) -> [T] {
+	public func collapseSection<T: ListViewItemModel>(_ handler: Closure<SectionModel, Bool>) -> [T] {
 		var items = [T]()
 		replace(section: handler) { (section) -> SectionModel in
 			var newSection = section
@@ -54,7 +54,7 @@ public extension ListManager {
 	- expands the required section (inserts all the items in the required section)
 	- new items need to be injected to the function (collapseSection(:) returns the collapsed items)
 	*/
-	public func expandSection(_ handler: Closure<SectionModel, Bool>, withItems items: [ItemModel]) {
+	public func expandSection(_ handler: Closure<SectionModel, Bool>, withItems items: [ListViewItemModel]) {
 		replace(section: handler) { (section) -> SectionModel in
 			var newSection = section
 			newSection.cells = items
@@ -65,7 +65,7 @@ public extension ListManager {
 
 extension SectionModel {
 
-	public func item(_ handler: Closure<ItemModel, Bool>) -> ItemModel? {
+	public func item(_ handler: Closure<ListViewItemModel, Bool>) -> ListViewItemModel? {
 		return cells.filter(handler).first
 	}
 }
