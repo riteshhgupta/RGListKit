@@ -1,5 +1,5 @@
 PODS:
-  - ProtoKit (1.0)
+  - ProtoKit (1.2)
   - ReactiveCocoa (7.0.1):
     - ReactiveSwift (~> 3.0)
   - ReactiveSwift (3.0.0):
@@ -17,11 +17,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ProtoKit:
-    :commit: c03e0ca32af1d35edb608758d9e7f165faeba0e1
+    :commit: d8572f3c0ff54ef551ee72fb8280746788bb4098
     :git: https://github.com/riteshhgupta/ProtoKit.git
 
 SPEC CHECKSUMS:
-  ProtoKit: 4c2ceffe01bb88dae28edf3cfd876f9f6edf40b1
+  ProtoKit: 9402368b3cd1ffa3a1f6f8ddde34313a5803b96e
   ReactiveCocoa: a1b5d502d0d1534f9a72981a485b297b17127f83
   ReactiveSwift: d9fe0db33c1aaabecb092e8de83cf52875c0de6f
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10

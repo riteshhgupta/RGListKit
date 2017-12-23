@@ -21,8 +21,12 @@ extension UITableView: ListableView {
 		set { dataSource = newValue as? UITableViewDataSource }
 	}
 	
-	public func register(nib: UINib, for identifier: String) {
+	public func registerItem(with nib: UINib, for identifier: String) {
 		register(nib, forCellReuseIdentifier: identifier)
+	}
+	
+	public func registerHeaderFooterItem(with nib: UINib, for identifier: String, of kind: String) {
+		register(nib, forHeaderFooterViewReuseIdentifier: identifier)
 	}
 	
 	public func reusableItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item {

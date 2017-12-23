@@ -1,6 +1,6 @@
 
 //
-//  ListManager+Extension.swift
+//  DiffableListViewHolder+Extension.swift
 //  RGListKit
 //
 //  Created by Ritesh Gupta on 04/10/17.
@@ -20,7 +20,7 @@ extension DiffableListViewHolder {
 	}
 
 	func headerFooterItemData<Item: ReusableView>(at indexPath: IndexPath, of kind: String) -> (Item, ListViewItemModel)? {
-		let section = sections[indexPath.row]
+		let section = sections[indexPath.section]
 		let identifier: String
 		let headerFooterModel: ListViewItemModel
 		switch kind {

@@ -22,7 +22,7 @@ open class StackViewHolder: ListViewHolder {
 		super.init(listView: listView)
 		let bundle = Bundle(for: holderType)
 		let nib = UINib(nibName: holderType.typeName, bundle: bundle)
-		listView.register(nib: nib, for: holderType.typeName)
+		listView.registerItem(with: nib, for: holderType.typeName)
 	}
 
 	public var itemModels: [StackViewItemModel] = [] {

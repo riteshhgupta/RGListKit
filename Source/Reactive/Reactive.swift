@@ -45,6 +45,14 @@ open class ReactiveDiffableListViewHolder: DiffableListViewHolder {
 		cell.itemModel.value = model
 		return item
 	}
+	
+	override open func listableView<Item: ReusableView>(_ listableView: ListableView, viewForHeaderFooterAt indexPath: IndexPath, of kind: String) -> Item? {
+		let data: (Item, ListViewItemModel)? = headerFooterItemData(at: indexPath, of: kind)
+		guard let (item, model) = data else { return nil }
+		guard let view = item as? ReactiveListViewItemModelInjectable else { return item }
+		view.itemModel.value = model
+		return item
+	}
 }
 
 open class ReactiveStackViewHolder: StackViewHolder {

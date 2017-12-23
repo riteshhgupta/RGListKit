@@ -21,8 +21,12 @@ extension UICollectionView: ListableView {
 		set { dataSource = newValue as? UICollectionViewDataSource }
 	}
 	
-	public func register(nib: UINib, for identifier: String) {
+	public func registerItem(with nib: UINib, for identifier: String) {
 		register(nib, forCellWithReuseIdentifier: identifier)
+	}
+	
+	public func registerHeaderFooterItem(with nib: UINib, for identifier: String, of kind: String) {
+		register(nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
 	}
 	
 	public func reusableItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item {

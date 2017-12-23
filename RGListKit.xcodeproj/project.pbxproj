@@ -23,7 +23,7 @@
 		3D9B92631FDC1F2500655C8B /* StackViewItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92581FDC1F2500655C8B /* StackViewItemModel.swift */; };
 		3D9B92641FDC1F2500655C8B /* StackViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B92591FDC1F2500655C8B /* StackViewHolder.swift */; };
 		3D9B92651FDC1F2500655C8B /* StackViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B925A1FDC1F2500655C8B /* StackViewCollectionViewCell.swift */; };
-		3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */; };
+		3D9FC1811F84EF7D00BC8267 /* DiffableListViewHolder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9FC1801F84EF7C00BC8267 /* DiffableListViewHolder+Extension.swift */; };
 		3DC64EDA1FDC2AE800E73AB0 /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC64ED91FDC2AE800E73AB0 /* StackViewController.swift */; };
 		3DC64EDC1FDC2DFF00E73AB0 /* StackItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DC64EDB1FDC2DFF00E73AB0 /* StackItemView.xib */; };
 		3DC64EDE1FDC2E1400E73AB0 /* StackItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC64EDD1FDC2E1400E73AB0 /* StackItemView.swift */; };
@@ -60,7 +60,7 @@
 		3D9B92581FDC1F2500655C8B /* StackViewItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewItemModel.swift; sourceTree = "<group>"; };
 		3D9B92591FDC1F2500655C8B /* StackViewHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewHolder.swift; sourceTree = "<group>"; };
 		3D9B925A1FDC1F2500655C8B /* StackViewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewCollectionViewCell.swift; sourceTree = "<group>"; };
-		3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListManager+Extension.swift"; sourceTree = "<group>"; };
+		3D9FC1801F84EF7C00BC8267 /* DiffableListViewHolder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffableListViewHolder+Extension.swift"; sourceTree = "<group>"; };
 		3DC64ED91FDC2AE800E73AB0 /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		3DC64EDB1FDC2DFF00E73AB0 /* StackItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StackItemView.xib; sourceTree = "<group>"; };
 		3DC64EDD1FDC2E1400E73AB0 /* StackItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackItemView.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 				3DD63E301E1FAE0B00167F9C /* EquatableItemModel.swift */,
 				3DD63E311E1FAE0B00167F9C /* ListViewItemModel.swift */,
 				3DD63E2C1E1FAE0B00167F9C /* DiffableListViewHolder.swift */,
-				3D9FC1801F84EF7C00BC8267 /* ListManager+Extension.swift */,
+				3D9FC1801F84EF7C00BC8267 /* DiffableListViewHolder+Extension.swift */,
 				3D3D11271EB9DEA2001DDC31 /* ListableDiffCalculator.swift */,
 				3DD63E321E1FAE0B00167F9C /* SectionModel.swift */,
 			);
@@ -376,7 +376,7 @@
 				3D9B92631FDC1F2500655C8B /* StackViewItemModel.swift in Sources */,
 				3DDFA0591F84992600D7E24C /* Reactive.swift in Sources */,
 				3D8A737C1EB9205100F32E32 /* SectionedValues.swift in Sources */,
-				3D9FC1811F84EF7D00BC8267 /* ListManager+Extension.swift in Sources */,
+				3D9FC1811F84EF7D00BC8267 /* DiffableListViewHolder+Extension.swift in Sources */,
 				3DD63E441E1FAE0B00167F9C /* SectionModel.swift in Sources */,
 				3D9B925E1FDC1F2500655C8B /* StackViewItemHolder.swift in Sources */,
 				3D99434D1FD95B2C002B7C7B /* ListViewItemModelInjectable.swift in Sources */,

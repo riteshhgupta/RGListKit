@@ -16,7 +16,8 @@ public protocol ListableView: class {
 	var listDelegate: ListableViewDelegate? { get set }
 	var listDatasource: ListableViewDatasource? { get set }
 	
-	func register(nib: UINib, for identifier: String)
+	func registerItem(with nib: UINib, for identifier: String)
+	func registerHeaderFooterItem(with nib: UINib, for identifier: String, of kind: String)
 	func reusableItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath) -> Item
 	func reusableHeaderFooterItem<Item: ReusableView>(withIdentifier identifier: String, for indexPath: IndexPath, of kind: String) -> Item?
 	func reloadItems()
