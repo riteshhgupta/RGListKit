@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      =  '1.0'
   spec.summary   =  'RGListKit - the missing gap between UITableView & UICollectionView!'
   spec.author = {
-    'Ritesh Gupta' => 'rg.riteshh@gmail.com'
+    'Ritesh Gupta' => 'rg.riteshh@gmail.com'  
   }
   spec.license          =  'MIT' 
   spec.homepage         =  'https://github.com/riteshhgupta/RGListKit'
@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc =  true
 
   spec.subspec 'Core' do |core|
-    core.dependency 'ProtoKit', '~> 1.0'
+    core.dependency 'ProtoKit', '~> 1.2'
     core.source_files =  'Source/**/*.swift', 'Source/**/*.xib'
     core.exclude_files = 'Source/Reactive/*.swift'
   end

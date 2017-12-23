@@ -36,7 +36,7 @@ public extension Reactive where Base: ReactiveStackViewHolder {
 	}
 }
 
-public class ReactiveDiffableListViewHolder: DiffableListViewHolder {
+open class ReactiveDiffableListViewHolder: DiffableListViewHolder {
 	
 	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
 		let data: (Item, ListViewItemModel) = itemData(at: indexPath)
@@ -47,7 +47,7 @@ public class ReactiveDiffableListViewHolder: DiffableListViewHolder {
 	}
 }
 
-public class ReactiveStackViewHolder: StackViewHolder {
+open class ReactiveStackViewHolder: StackViewHolder {
 	
 	override open func listableView<Item: ReusableView>(_ listableView: ListableView, itemForItemAt indexPath: IndexPath) -> Item {
 		let model = itemModels[indexPath.row]
