@@ -4,7 +4,7 @@
 target 'RGListKit' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'ReactiveSwift', '~> 3.0'
-  pod 'ReactiveCocoa', '~> 7.0'
-  pod 'ProtoKit', :git => 'https://github.com/riteshhgupta/ProtoKit.git'
+  pod 'ReactiveSwift', '~> 4.0'
+  pod 'ReactiveCocoa', '~> 8.0'
+  pod 'ProtoKit', '~> 1.3'
 end

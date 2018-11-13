@@ -30,7 +30,7 @@ public protocol ListViewItemModel {
 
 public extension ListViewItemModel {
 
-	var height: CGFloat { return UITableViewAutomaticDimension }
+    var height: CGFloat { return UITableView.automaticDimension }
 	var width: CGFloat { return 0.0 }
 	var estimatedHeight: CGFloat { return 100.0 }
 	

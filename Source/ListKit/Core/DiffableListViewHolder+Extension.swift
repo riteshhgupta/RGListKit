@@ -24,11 +24,11 @@ extension DiffableListViewHolder {
 		let identifier: String
 		let headerFooterModel: ListViewItemModel
 		switch kind {
-		case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
 			guard let model = section.header else { return nil }
 			identifier = model.reuseIdentifier
 			headerFooterModel = model
-		case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
 			guard let model = section.footer else { return nil }
 			identifier = model.reuseIdentifier
 			headerFooterModel = model

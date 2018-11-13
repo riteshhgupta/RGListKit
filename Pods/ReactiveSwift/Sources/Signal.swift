@@ -1,5 +1,6 @@
 import Foundation
 import Result
+import Dispatch
 
 /// A push-driven stream that sends Events over time, parameterized by the type
 /// of values being sent (`Value`) and the type of failure that can occur
@@ -538,8 +539,12 @@ extension Signal {
 	///
 	/// - returns: A signal that forwards events yielded by the action.
 	internal func flatMapEvent<U, E>(_ transform: @escaping Event.Transformation<U, E>) -> Signal<U, E> {
-		return Signal<U, E> { observer, lifetime in
-			lifetime += self.observe(Signal.Observer(observer, transform))
+		return Signal<U, E> { output, lifetime in
+			// Create an input sink whose events would go through the given
+			// event transformation, and have the resulting events propagated
+			// to the resulting `Signal`.
+			let input = transform(output.send, lifetime)
+			lifetime += self.observe(input)
 		}
 	}
 
@@ -552,6 +557,16 @@ extension Signal {
 	/// - returns: A signal that will send new values.
 	public func map<U>(_ transform: @escaping (Value) -> U) -> Signal<U, Error> {
 		return flatMapEvent(Signal.Event.map(transform))
+	}
+	
+	/// Map each value in the signal to a new constant value.
+	///
+	/// - parameters:
+	///   - value: A new value.
+	///
+	/// - returns: A signal that will send new values.
+	public func map<U>(value: U) -> Signal<U, Error> {
+		return map { _ in value }
 	}
 
 	/// Map each value in the signal to a new value by applying a key path.
@@ -591,10 +606,7 @@ extension Signal {
 	/// - returns: A signal that sends values obtained using `transform` as this 
 	///            signal sends values.
 	public func lazyMap<U>(on scheduler: Scheduler, transform: @escaping (Value) -> U) -> Signal<U, Error> {
-		return flatMap(.latest) { value in
-			return SignalProducer({ transform(value) })
-				.start(on: scheduler)
-		}
+		return flatMapEvent(Signal.Event.lazyMap(on: scheduler, transform: transform))
 	}
 
 	/// Preserve only values which pass the given closure.
@@ -754,6 +766,28 @@ extension Signal {
 		return flatMapEvent(Signal.Event.collect(shouldEmit))
 	}
 
+	/// Forward the latest values on `scheduler` every `interval`.
+	///
+	/// - note: If `self` terminates while values are being accumulated,
+	///         the behaviour will be determined by `discardWhenCompleted`.
+	///         If `true`, the values will be discarded and the returned signal
+	///         will terminate immediately.
+	///         If `false`, that values will be delivered at the next interval.
+	///
+	/// - parameters:
+	///   - interval: A repetition interval.
+	///   - scheduler: A scheduler to send values on.
+	///   - skipEmpty: Whether empty arrays should be sent if no values were
+	///     accumulated during the interval.
+	///   - discardWhenCompleted: A boolean to indicate if the latest unsent
+	///     values should be discarded on completion.
+	///
+	/// - returns: A signal that sends all values that are sent from `self` at
+	///            `interval` seconds apart.
+	public func collect(every interval: DispatchTimeInterval, on scheduler: DateScheduler, skipEmpty: Bool = false, discardWhenCompleted: Bool = true) -> Signal<[Value], Error> {
+		return flatMapEvent(Signal.Event.collect(every: interval, on: scheduler, skipEmpty: skipEmpty, discardWhenCompleted: discardWhenCompleted))
+	}
+
 	/// Forward all events onto the given scheduler, instead of whichever
 	/// scheduler they originally arrived upon.
 	///
@@ -786,6 +820,17 @@ extension Signal {
 	///            and given signal.
 	public func combineLatest<U>(with other: Signal<U, Error>) -> Signal<(Value, U), Error> {
 		return Signal.combineLatest(self, other)
+	}
+	
+	/// Merge the given signal into a single `Signal` that will emit all
+	/// values from both of them, and complete when all of them have completed.
+	///
+	/// - parameters:
+	///   - other: A signal to merge `self`'s value with.
+	///
+	/// - returns: A signal that sends all values of `self` and given signal.
+	public func merge(with other: Signal<Value, Error>) -> Signal<Value, Error> {
+		return Signal.merge(self, other)
 	}
 
 	/// Delay `value` and `completed` events by the given interval, forwarding
@@ -1060,6 +1105,25 @@ extension Signal {
 				lifetime += self.withLatest(from: signal).observe(observer)
 			}
 		}
+	}
+
+	/// Forward the latest value from `samplee` with the value from `self` as a
+	/// tuple, only when `self` sends a `value` event.
+	/// This is like a flipped version of `sample(with:)`, but `samplee`'s
+	/// terminal events are completely ignored.
+	///
+	/// - note: If `self` fires before a value has been observed on `samplee`,
+	///         nothing happens.
+	///
+	/// - parameters:
+	///   - samplee: A producer whose latest value is sampled by `self`.
+	///
+	/// - returns: A signal that will send values from `self` and `samplee`,
+	///            sampled (possibly multiple times) by `self`, then terminate
+	///            once `self` has terminated. **`samplee`'s terminated events
+	///            are ignored**.
+	public func withLatest<Samplee: SignalProducerConvertible>(from samplee: Samplee) -> Signal<(Value, Samplee.Value), Error> where Samplee.Error == NoError {
+		return withLatest(from: samplee.producer)
 	}
 }
 
@@ -1366,59 +1430,7 @@ extension Signal {
 	/// - returns: A signal that sends values at least `interval` seconds 
 	///            appart on a given scheduler.
 	public func throttle(_ interval: TimeInterval, on scheduler: DateScheduler) -> Signal<Value, Error> {
-		precondition(interval >= 0)
-
-		return Signal { observer, lifetime in
-			let state: Atomic<ThrottleState<Value>> = Atomic(ThrottleState())
-			let schedulerDisposable = SerialDisposable()
-			lifetime += schedulerDisposable
-
-			lifetime += self.observe { event in
-				guard let value = event.value else {
-					schedulerDisposable.inner = scheduler.schedule {
-						observer.send(event)
-					}
-					return
-				}
-
-				var scheduleDate: Date!
-				state.modify {
-					$0.pendingValue = value
-
-					let proposedScheduleDate: Date
-					if let previousDate = $0.previousDate, previousDate.compare(scheduler.currentDate) != .orderedDescending {
-						proposedScheduleDate = previousDate.addingTimeInterval(interval)
-					} else {
-						proposedScheduleDate = scheduler.currentDate
-					}
-
-					switch proposedScheduleDate.compare(scheduler.currentDate) {
-					case .orderedAscending:
-						scheduleDate = scheduler.currentDate
-
-					case .orderedSame: fallthrough
-					case .orderedDescending:
-						scheduleDate = proposedScheduleDate
-					}
-				}
-
-				schedulerDisposable.inner = scheduler.schedule(after: scheduleDate) {
-					let pendingValue: Value? = state.modify { state in
-						defer {
-							if state.pendingValue != nil {
-								state.pendingValue = nil
-								state.previousDate = scheduleDate
-							}
-						}
-						return state.pendingValue
-					}
-
-					if let pendingValue = pendingValue {
-						observer.send(value: pendingValue)
-					}
-				}
-			}
-		}
+		return flatMapEvent(Signal.Event.throttle(interval, on: scheduler))
 	}
 
 	/// Conditionally throttles values sent on the receiver whenever
@@ -1521,39 +1533,25 @@ extension Signal {
 	/// - note: If multiple values are received before the interval has elapsed,
 	///         the latest value is the one that will be passed on.
 	///
-	/// - note: If the input signal terminates while a value is being debounced, 
-	///         that value will be discarded and the returned signal will 
-	///         terminate immediately.
+	/// - note: If `self` terminates while a value is being debounced,
+	///         the behaviour will be determined by `discardWhenCompleted`.
+	///         If `true`, that value will be discarded and the returned producer
+	///         will terminate immediately.
+	///         If `false`, that value will be delivered at the next debounce
+	///         interval.
 	///
 	/// - precondition: `interval` must be non-negative number.
 	///
 	/// - parameters:
 	///   - interval: A number of seconds to wait before sending a value.
 	///   - scheduler: A scheduler to send values on.
+	///   - discardWhenCompleted: A boolean to indicate if the latest value
+	///                             should be discarded on completion.
 	///
 	/// - returns: A signal that sends values that are sent from `self` at least
 	///            `interval` seconds apart.
-	public func debounce(_ interval: TimeInterval, on scheduler: DateScheduler) -> Signal<Value, Error> {
-		precondition(interval >= 0)
-
-		return Signal { observer, lifetime in
-			let d = SerialDisposable()
-
-			lifetime += self.observe { event in
-				switch event {
-				case let .value(value):
-					let date = scheduler.currentDate.addingTimeInterval(interval)
-					d.inner = scheduler.schedule(after: date) {
-						observer.send(value: value)
-					}
-
-				case .completed, .failed, .interrupted:
-					d.inner = scheduler.schedule {
-						observer.send(event)
-					}
-				}
-			}
-		}
+	public func debounce(_ interval: TimeInterval, on scheduler: DateScheduler, discardWhenCompleted: Bool = true) -> Signal<Value, Error> {
+		return flatMapEvent(Signal.Event.debounce(interval, on: scheduler, discardWhenCompleted: discardWhenCompleted))
 	}
 }
 
@@ -1586,11 +1584,6 @@ extension Signal where Value: Hashable {
 	public func uniqueValues() -> Signal<Value, Error> {
 		return uniqueValues { $0 }
 	}
-}
-
-private struct ThrottleState<Value> {
-	var previousDate: Date?
-	var pendingValue: Value?
 }
 
 private enum ThrottleWhileState<Value> {

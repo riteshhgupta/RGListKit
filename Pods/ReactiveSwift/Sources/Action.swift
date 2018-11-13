@@ -133,14 +133,12 @@ public final class Action<Input, Output, Error: Swift.Error> {
 			}
 		}
 
-		let disposable = state.producer.startWithValues { value in
+		lifetime += state.producer.startWithValues { value in
 			modifyActionState { state in
 				state.value = value
 				state.isUserEnabled = isUserEnabled(value)
 			}
 		}
-
-		lifetime.observeEnded(disposable.dispose)
 
 		self.execute = { action, input in
 			return SignalProducer { observer, lifetime in
@@ -336,3 +334,6 @@ extension ActionError where Error: Equatable {
 		}
 	}
 }
+
+extension ActionError: Equatable where Error: Equatable {}
+
