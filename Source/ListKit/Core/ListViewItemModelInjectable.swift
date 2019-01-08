@@ -18,5 +18,5 @@ import Foundation
 
 public protocol ListViewItemModelInjectable {
 	
-	var itemModel: ((ListViewItemModel) -> Void)? { get set }
+	var itemModel: ((ListViewItemModel) -> Void)? { get }
 }
